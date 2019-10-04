@@ -12,6 +12,7 @@
 ->    /                              org.combinators.solitaire.minimal.Minimal
 ->    /                              org.combinators.solitaire.napoleon.Napoleon
 ->    /                              org.combinators.solitaire.gamma.Gamma
+->    /                              org.combinators.solitaire.auldlangsyne.AuldLangSyneController
 # All variants have names that end in "Controller", and then can extract package.MainClass easily
 ->    /                              org.combinators.solitaire.freecell.FreeCellController
 ->    /                              org.combinators.solitaire.freecell.ChallengeFreeCellController
