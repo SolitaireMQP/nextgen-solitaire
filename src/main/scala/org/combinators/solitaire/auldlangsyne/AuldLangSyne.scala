@@ -13,25 +13,18 @@ import play.api.inject.ApplicationLifecycle
 
 class AuldLangSyne @Inject()(web: WebJarsUtil, app: ApplicationLifecycle) extends InhabitationController(web, app) with RoutingEntries {
 
-  lazy val variation: Solitaire = auldlangsyne
+  val solitaire: Solitaire = auldlangsyne
 
-  lazy val repository: AuldLangSyneDomain with controllers = new AuldLangSyneDomain(variation) with controllers {}
+  lazy val repository: auldlangsyneDomain with controllers = new auldlangsyneDomain(solitaire) with controllers {}
 
-  lazy val Gamma: ReflectedRepository[AuldLangSyneDomain with controllers] = repository.init(ReflectedRepository(repository, classLoader = this.getClass.getClassLoader), variation)
+  lazy val Gamma = repository.init(ReflectedRepository(repository, classLoader = this.getClass.getClassLoader), solitaire)
 
-  lazy val combinatorComponents: Map[String, CombinatorInfo] = Gamma.combinatorComponents
+  lazy val combinatorComponents = Gamma.combinatorComponents
 
-  lazy val targets: Seq[Constructor] = Synthesizer.allTargets(variation)
+  lazy val targets: Seq[Constructor] = Synthesizer.allTargets(solitaire)
 
   lazy val results: Results =
     EmptyInhabitationBatchJobResults(Gamma).addJobs[CompilationUnit](targets).compute()
+  lazy val controllerAddress: String = solitaire.name.toLowerCase
 
-  override val routingPrefix = Some("auldlangsyne")
-  lazy val controllerAddress: String = variation.name.toLowerCase
-
-}
-
-class AuldLangSyneController @Inject()(webJars: WebJarsUtil, applicationLifecycle: ApplicationLifecycle)
-  extends AuldLangSyne(webJars, applicationLifecycle) {
-  override lazy val variation: Solitaire = auldlangsyne
 }

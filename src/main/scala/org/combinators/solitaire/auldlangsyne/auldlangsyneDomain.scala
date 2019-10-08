@@ -13,8 +13,8 @@ import org.combinators.solitaire.shared._
 import org.combinators.solitaire.shared.compilation.{CodeGeneratorRegistry, generateHelper}
 
 // Looks awkward how solitaire val is defined, but I think I need to do this
-// to get the code to compile 
-class AuldLangSyneDomain(override val solitaire: Solitaire) extends SolitaireDomain(solitaire) with GameTemplate with Controller {
+// to get the code to compile
+class auldlangsyneDomain(override val solitaire: Solitaire) extends SolitaireDomain(solitaire) with GameTemplate with Controller {
 
   object auldlangsyneCodeGenerator {
     val generators: CodeGeneratorRegistry[Expression] = constraintCodeGenerators.generators
